@@ -1,0 +1,346 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="contact__panel" data-contact-reveal>
+    <div class="contact__intro">
+      <p class="contact__eyebrow">CONTACT</p>
+      <h2 id="contact-title">Klaar voor een sterk en duurzaam dak?</h2>
+      <p>Neem contact op voor een vrijblijvende offerte of meer informatie over uw project.</p>
+    </div>
+
+    <div class="contact__details" aria-label="Contactgegevens">
+      <a href="tel:+32468282736" data-contact-reveal>0468 28 27 36</a>
+      <a href="mailto:info.kevinclaes@gmail.com" data-contact-reveal>info.kevinclaes@gmail.com</a>
+      <span data-contact-reveal>Wingene</span>
+    </div>
+
+    <div class="contact__actions" data-contact-reveal>
+      <a class="contact__button contact__button--primary" href="tel:+32468282736">Bel Kevin</a>
+      <a class="contact__button contact__button--secondary" href="mailto:info.kevinclaes@gmail.com">
+        Stuur een e-mail
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <a class="footer__logo" href={base} aria-label="Kevin Claes Algemene Dakwerken">
+    <img
+      src={`${base}images/11-logo-kevin-claes.png`}
+      alt="Kevin Claes Algemene Dakwerken"
+      loading="lazy"
+      width="1480"
+      height="440"
+    />
+  </a>
+
+  <nav class="footer__nav" aria-label="Footernavigatie">
+    <a href="#diensten">Diensten</a>
+    <a href="#realisaties">Realisaties</a>
+    <a href="#over-ons">Over ons</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <p class="footer__name">Algemene Dakwerken Kevin Claes</p>
+
+  <div class="footer__bottom">
+    <p>© 2026 Kevin Claes Algemene Dakwerken</p>
+    <p>
+      Website door{" "}
+      <a href="https://bmastudio.be" target="_blank" rel="noopener noreferrer">BMA Studio</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!prefersReducedMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from("[data-contact-reveal]", {
+      autoAlpha: 0,
+      y: 24,
+      duration: 0.85,
+      ease: "power3.out",
+      stagger: 0.1,
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: ".contact",
+        start: "top 74%",
+        once: true,
+      },
+    });
+  }
+</script>
+
+<style>
+  .contact {
+    padding: var(--section-space) var(--content-gutter) clamp(3rem, 6vw, 5rem);
+    color: var(--color-white);
+    background:
+      linear-gradient(180deg, #111314 0%, #151819 100%),
+      var(--color-charcoal);
+  }
+
+  .contact__panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    padding: clamp(2rem, 5vw, 4.5rem) 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .contact__panel::before,
+  .contact__panel::after {
+    position: absolute;
+    content: "";
+    pointer-events: none;
+  }
+
+  .contact__panel::before {
+    top: 0;
+    left: 0;
+    width: clamp(7rem, 18vw, 18rem);
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  .contact__panel::after {
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    height: clamp(7rem, 16vw, 14rem);
+    background: rgba(255, 211, 67, 0.72);
+  }
+
+  .contact__intro {
+    max-width: 50rem;
+  }
+
+  .contact__eyebrow {
+    margin: 0 0 1rem;
+    color: var(--color-accent);
+    font-size: var(--label-size);
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .contact h2 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: var(--heading-section);
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  .contact__intro p:not(.contact__eyebrow) {
+    max-width: 38rem;
+    margin: 1.45rem 0 0;
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .contact__details {
+    align-self: end;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .contact__details a,
+  .contact__details span {
+    display: block;
+    padding: 1.15rem 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(1.15rem, 2vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    transition: color 160ms ease;
+  }
+
+  .contact__details a:hover,
+  .contact__details a:focus-visible {
+    color: var(--color-accent);
+  }
+
+  .contact__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .contact__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.2rem;
+    padding: 0 1.35rem;
+    font-size: 0.94rem;
+    font-weight: 800;
+    text-decoration: none;
+    border-radius: 4px;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .contact__button:hover,
+  .contact__button:focus-visible {
+    transform: translateY(-1px);
+  }
+
+  .contact__button--primary {
+    color: var(--color-charcoal);
+    background: var(--color-accent);
+    border: 1px solid rgba(255, 211, 67, 0.64);
+  }
+
+  .contact__button--primary:hover,
+  .contact__button--primary:focus-visible {
+    background: var(--color-accent-soft);
+  }
+
+  .contact__button--secondary {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .contact__button--secondary:hover,
+  .contact__button--secondary:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.48);
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.8fr) minmax(16rem, 1fr) minmax(16rem, 0.8fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+    padding: clamp(2rem, 4vw, 3rem) var(--content-gutter);
+    color: var(--color-white);
+    background: #0e1011;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .footer__logo {
+    display: inline-flex;
+    width: clamp(8.5rem, 13vw, 12rem);
+  }
+
+  .footer__logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem clamp(1rem, 2.4vw, 2rem);
+    justify-content: center;
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .footer__nav a {
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .footer__nav a:hover,
+  .footer__nav a:focus-visible {
+    color: var(--color-white);
+  }
+
+  .footer__name {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: right;
+  }
+
+  .footer__bottom {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.5rem;
+    justify-content: space-between;
+    padding-top: 1.35rem;
+    color: rgba(255, 255, 255, 0.54);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer__bottom p {
+    margin: 0;
+  }
+
+  .footer__bottom a {
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration-color: rgba(255, 211, 67, 0.56);
+    text-underline-offset: 0.22em;
+    transition: color 160ms ease;
+  }
+
+  .footer__bottom a:hover,
+  .footer__bottom a:focus-visible {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 860px) {
+    .contact__panel {
+      grid-template-columns: 1fr;
+    }
+
+    .contact h2 {
+      max-width: none;
+    }
+
+    .contact__details {
+      align-self: auto;
+    }
+
+    .footer {
+      grid-template-columns: 1fr;
+    }
+
+    .footer__nav {
+      justify-content: flex-start;
+    }
+
+    .footer__name {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .contact__button {
+      width: 100%;
+    }
+
+    .footer__bottom {
+      display: grid;
+    }
+  }
+</style>

@@ -1,0 +1,252 @@
+---
+const steps = [
+  {
+    title: "Contact",
+    text: "U neemt contact op en vertelt kort wat er moet gebeuren.",
+  },
+  {
+    title: "Plaatsbezoek",
+    text: "De situatie wordt bekeken en de juiste oplossing wordt bepaald.",
+  },
+  {
+    title: "Offerte",
+    text: "U ontvangt een duidelijke offerte voor de afgesproken werken.",
+  },
+  {
+    title: "Uitvoering",
+    text: "De werken worden zorgvuldig uitgevoerd en netjes afgewerkt.",
+  },
+];
+---
+
+<section class="workflow" aria-labelledby="workflow-title">
+  <div class="workflow__intro" data-workflow-reveal>
+    <p class="workflow__eyebrow">WERKWIJZE</p>
+    <h2 id="workflow-title">Van aanvraag tot afgewerkt dak.</h2>
+    <p>Een duidelijke aanpak zonder onnodige omwegen.</p>
+  </div>
+
+  <div class="workflow__steps" data-workflow-line>
+    {
+      steps.map((step, index) => (
+        <article class="workflow__step" data-workflow-step>
+          <span class="workflow__marker" aria-hidden="true"></span>
+          <span class="workflow__number">{String(index + 1).padStart(2, "0")}</span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!prefersReducedMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from("[data-workflow-reveal]", {
+      autoAlpha: 0,
+      y: 24,
+      duration: 0.85,
+      ease: "power3.out",
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: ".workflow",
+        start: "top 74%",
+        once: true,
+      },
+    });
+
+    gsap.from("[data-workflow-step]", {
+      autoAlpha: 0,
+      y: 24,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.14,
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: ".workflow__steps",
+        start: "top 76%",
+        once: true,
+      },
+    });
+
+    gsap.fromTo(
+      ".workflow__steps",
+      { "--line-progress": "0%" },
+      {
+        "--line-progress": "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".workflow__steps",
+          start: "top 78%",
+          end: "bottom 62%",
+          scrub: true,
+        },
+      },
+    );
+  }
+</script>
+
+<style>
+  .workflow {
+    padding: var(--section-space) var(--content-gutter);
+    color: var(--color-white);
+    background: #111314;
+  }
+
+  .workflow__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 28rem);
+    gap: clamp(1.5rem, 5vw, 5rem);
+    align-items: end;
+    margin-bottom: clamp(4.5rem, 8vw, 7rem);
+  }
+
+  .workflow__eyebrow {
+    grid-column: 1 / -1;
+    margin: 0 0 -0.45rem;
+    color: var(--color-accent);
+    font-size: var(--label-size);
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .workflow__intro h2 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: var(--heading-section);
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  .workflow__intro p:not(.workflow__eyebrow) {
+    margin: 0 0 0.35rem;
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .workflow__steps {
+    --line-progress: 0%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 3rem);
+    padding-top: 3.75rem;
+  }
+
+  .workflow__steps::before,
+  .workflow__steps::after {
+    position: absolute;
+    top: 1.08rem;
+    left: 0;
+    height: 1px;
+    content: "";
+  }
+
+  .workflow__steps::before {
+    right: 0;
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .workflow__steps::after {
+    width: var(--line-progress);
+    background: var(--color-accent);
+  }
+
+  .workflow__step {
+    position: relative;
+    min-height: 16rem;
+  }
+
+  .workflow__marker {
+    position: absolute;
+    top: -3.05rem;
+    left: 0;
+    width: 0.78rem;
+    height: 0.78rem;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0.5rem rgba(255, 211, 67, 0.08);
+  }
+
+  .workflow__number {
+    display: block;
+    margin-bottom: clamp(2rem, 5vw, 4.5rem);
+    color: rgba(255, 255, 255, 0.12);
+    font-size: clamp(3.6rem, 7vw, 7rem);
+    font-weight: 800;
+    line-height: 0.82;
+  }
+
+  .workflow__step h3 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2vw, 2rem);
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .workflow__step p {
+    max-width: 18rem;
+    margin: 1rem 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.98rem;
+    line-height: 1.62;
+  }
+
+  @media (max-width: 860px) {
+    .workflow__intro {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+    }
+
+    .workflow__intro h2 {
+      max-width: none;
+    }
+
+    .workflow__steps {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-top: 0;
+      padding-left: 2rem;
+    }
+
+    .workflow__steps::before,
+    .workflow__steps::after {
+      top: 0.2rem;
+      bottom: 0.2rem;
+      left: 0.36rem;
+      width: 1px;
+      height: auto;
+    }
+
+    .workflow__steps::after {
+      height: var(--line-progress);
+    }
+
+    .workflow__step {
+      min-height: 0;
+    }
+
+    .workflow__marker {
+      top: 0.14rem;
+      left: -2rem;
+    }
+
+    .workflow__number {
+      margin-bottom: 1.15rem;
+      font-size: clamp(3.2rem, 18vw, 5.6rem);
+    }
+
+    .workflow__step p {
+      max-width: 30rem;
+    }
+  }
+</style>
