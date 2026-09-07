@@ -2,7 +2,15 @@
 import "../styles/global.css";
 
 const base = import.meta.env.BASE_URL;
-const canonicalUrl = new URL(base, Astro.site).href;
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Kevin Claes Algemene Dakwerken | Dakwerker Wingene",
+  description = "Algemene Dakwerken Kevin Claes voor dakrenovaties, Velux, zinkwerk en rustieke dakbedekking in Wingene en omgeving.",
+} = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(`${base}images/01-hero-dakrenovatie-zonsondergang.png`, Astro.site).href;
 ---
 
@@ -11,20 +19,20 @@ const ogImageUrl = new URL(`${base}images/01-hero-dakrenovatie-zonsondergang.png
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Kevin Claes Algemene Dakwerken | Dakwerker Wingene</title>
+    <title>{title}</title>
     <meta
       name="description"
-      content="Algemene Dakwerken Kevin Claes voor dakrenovaties, Velux, zinkwerk en rustieke dakbedekking in Wingene en omgeving."
+      content={description}
     />
     <meta name="theme-color" content="#111314" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="nl_BE" />
-    <meta property="og:title" content="Kevin Claes Algemene Dakwerken | Dakwerker Wingene" />
+    <meta property="og:title" content={title} />
     <meta
       property="og:description"
-      content="Algemene Dakwerken Kevin Claes voor dakrenovaties, Velux, zinkwerk en rustieke dakbedekking in Wingene en omgeving."
+      content={description}
     />
     <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
@@ -45,6 +53,12 @@ const ogImageUrl = new URL(`${base}images/01-hero-dakrenovatie-zonsondergang.png
           duration: 1,
           smoothWheel: true,
           wheelMultiplier: 0.82,
+        });
+
+        document.addEventListener("navigation:toggle", (event) => {
+          const { isOpen } = (event as CustomEvent<{ isOpen: boolean }>).detail;
+          if (isOpen) lenis.stop();
+          else lenis.start();
         });
 
         lenis.on("scroll", ScrollTrigger.update);

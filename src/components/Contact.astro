@@ -1,5 +1,5 @@
 ---
-const base = import.meta.env.BASE_URL;
+import Footer from "./Footer.astro";
 ---
 
 <section class="contact" id="contact" aria-labelledby="contact-title">
@@ -25,34 +25,7 @@ const base = import.meta.env.BASE_URL;
   </div>
 </section>
 
-<footer class="footer">
-  <a class="footer__logo" href={base} aria-label="Kevin Claes Algemene Dakwerken">
-    <img
-      src={`${base}images/11-logo-kevin-claes.png`}
-      alt="Kevin Claes Algemene Dakwerken"
-      loading="lazy"
-      width="1480"
-      height="440"
-    />
-  </a>
-
-  <nav class="footer__nav" aria-label="Footernavigatie">
-    <a href="#diensten">Diensten</a>
-    <a href="#realisaties">Realisaties</a>
-    <a href="#over-ons">Over ons</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <p class="footer__name">Algemene Dakwerken Kevin Claes</p>
-
-  <div class="footer__bottom">
-    <p>© 2026 Kevin Claes Algemene Dakwerken</p>
-    <p>
-      Website door{" "}
-      <a href="https://bmastudio.be" target="_blank" rel="noopener noreferrer">BMA Studio</a>
-    </p>
-  </div>
-</footer>
+<Footer />
 
 <script>
   import gsap from "gsap";
@@ -229,85 +202,6 @@ const base = import.meta.env.BASE_URL;
     border-color: rgba(255, 255, 255, 0.48);
   }
 
-  .footer {
-    display: grid;
-    grid-template-columns: minmax(9rem, 0.8fr) minmax(16rem, 1fr) minmax(16rem, 0.8fr);
-    gap: clamp(1.5rem, 4vw, 4rem);
-    align-items: start;
-    padding: clamp(2rem, 4vw, 3rem) var(--content-gutter);
-    color: var(--color-white);
-    background: #0e1011;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  .footer__logo {
-    display: inline-flex;
-    width: clamp(8.5rem, 13vw, 12rem);
-  }
-
-  .footer__logo img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .footer__nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem clamp(1rem, 2.4vw, 2rem);
-    justify-content: center;
-    font-size: 0.86rem;
-    font-weight: 700;
-  }
-
-  .footer__nav a {
-    color: rgba(255, 255, 255, 0.72);
-    text-decoration: none;
-    transition: color 160ms ease;
-  }
-
-  .footer__nav a:hover,
-  .footer__nav a:focus-visible {
-    color: var(--color-white);
-  }
-
-  .footer__name {
-    margin: 0;
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 0.95rem;
-    font-weight: 700;
-    line-height: 1.4;
-    text-align: right;
-  }
-
-  .footer__bottom {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem 1.5rem;
-    justify-content: space-between;
-    padding-top: 1.35rem;
-    color: rgba(255, 255, 255, 0.54);
-    font-size: 0.8rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .footer__bottom p {
-    margin: 0;
-  }
-
-  .footer__bottom a {
-    color: rgba(255, 255, 255, 0.78);
-    text-decoration-color: rgba(255, 211, 67, 0.56);
-    text-underline-offset: 0.22em;
-    transition: color 160ms ease;
-  }
-
-  .footer__bottom a:hover,
-  .footer__bottom a:focus-visible {
-    color: var(--color-accent);
-  }
-
   @media (max-width: 860px) {
     .contact__panel {
       grid-template-columns: 1fr;
@@ -320,27 +214,11 @@ const base = import.meta.env.BASE_URL;
     .contact__details {
       align-self: auto;
     }
-
-    .footer {
-      grid-template-columns: 1fr;
-    }
-
-    .footer__nav {
-      justify-content: flex-start;
-    }
-
-    .footer__name {
-      text-align: left;
-    }
   }
 
   @media (max-width: 560px) {
     .contact__button {
       width: 100%;
-    }
-
-    .footer__bottom {
-      display: grid;
     }
   }
 </style>

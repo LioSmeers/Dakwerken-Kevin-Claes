@@ -56,8 +56,10 @@ select {
   font: inherit;
 }
 
+html.is-menu-open,
 body.is-menu-open {
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
