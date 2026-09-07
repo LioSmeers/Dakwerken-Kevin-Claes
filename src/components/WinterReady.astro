@@ -1,0 +1,241 @@
+---
+const base = import.meta.env.BASE_URL;
+
+const points = [
+  {
+    title: "Minder warmteverlies",
+    text: "Een niet-geïsoleerde zolder is één van de grootste warmtelekken van de woning.",
+  },
+  {
+    title: "Winterklaar dak",
+    text: "Onderhoud en afdichting die vocht en tocht buitenhouden vóór het stookseizoen.",
+  },
+  {
+    title: "Zolder als extra ruimte",
+    text: "Geïsoleerd en afgewerkt tot een volwaardige kamer, het hele jaar door bruikbaar.",
+  },
+];
+---
+
+<section class="winter" id="isolatie" aria-labelledby="winter-title">
+  <div class="winter__content">
+    <p class="winter__eyebrow" data-winter-reveal>WINTERKLAAR</p>
+    <h2 id="winter-title" data-winter-reveal>Isoleer nu, bespaar de hele winter.</h2>
+    <p class="winter__text" data-winter-reveal>
+      Een dak dat niet goed isoleert, kost u elke winter opnieuw geld. Kevin Claes isoleert dak
+      en zolder grondig en richt uw zolder in tot een volwaardige, comfortabele ruimte, klaar
+      voor de kou.
+    </p>
+
+    <ul class="winter__points" data-winter-reveal>
+      {
+        points.map((point) => (
+          <li>
+            <h3>{point.title}</h3>
+            <p>{point.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a class="winter__cta" href="#contact" data-winter-reveal>Vraag een isolatiecheck aan</a>
+  </div>
+
+  <div class="winter__media" data-winter-reveal>
+    <img
+      src={`${base}images/08-project-zolder-houtconstructie.png`}
+      alt="Geïsoleerde zolderconstructie, klaar voor afwerking"
+      data-winter-image
+      loading="lazy"
+      width="1444"
+      height="1089"
+    />
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!prefersReducedMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from("[data-winter-reveal]", {
+      autoAlpha: 0,
+      y: 24,
+      duration: 0.85,
+      ease: "power3.out",
+      stagger: 0.11,
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: ".winter",
+        start: "top 72%",
+        once: true,
+      },
+    });
+
+    gsap.to("[data-winter-image]", {
+      yPercent: -8,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".winter",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }
+</script>
+
+<style>
+  .winter {
+    display: grid;
+    grid-template-columns: minmax(20rem, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
+    padding: var(--section-space) var(--content-gutter);
+    color: var(--color-white);
+    background: linear-gradient(180deg, #16191a 0%, #111314 100%);
+  }
+
+  .winter__content {
+    max-width: 40rem;
+  }
+
+  .winter__eyebrow {
+    margin: 0 0 1rem;
+    color: var(--color-accent);
+    font-size: var(--label-size);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .winter h2 {
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(2.55rem, 5.9vw, 5.15rem);
+    line-height: 0.98;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+
+  .winter__text {
+    max-width: 36rem;
+    margin: 1.65rem 0 0;
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.25vw, 1.16rem);
+    line-height: 1.72;
+  }
+
+  .winter__points {
+    display: grid;
+    gap: 0;
+    max-width: 34rem;
+    margin: 2.15rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .winter__points li {
+    padding: 1.15rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .winter__points h3 {
+    margin: 0;
+    color: var(--color-white);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+
+  .winter__points p {
+    max-width: 30rem;
+    margin: 0.4rem 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .winter__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.2rem;
+    margin-top: 2rem;
+    padding: 0 1.35rem;
+    color: var(--color-charcoal);
+    font-size: 0.94rem;
+    font-weight: 800;
+    text-decoration: none;
+    background: var(--color-accent);
+    border: 1px solid rgba(255, 211, 67, 0.64);
+    border-radius: 4px;
+    transition:
+      background-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .winter__cta:hover,
+  .winter__cta:focus-visible {
+    background: var(--color-accent-soft);
+    transform: translateY(-1px);
+  }
+
+  .winter__media {
+    position: relative;
+    height: min(74vh, 44rem);
+    min-height: 28rem;
+    overflow: hidden;
+    background: var(--color-charcoal-soft);
+  }
+
+  .winter__media::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background:
+      linear-gradient(180deg, rgba(17, 19, 20, 0.04) 0%, rgba(17, 19, 20, 0.36) 100%),
+      linear-gradient(270deg, rgba(17, 19, 20, 0.18) 0%, rgba(17, 19, 20, 0) 52%);
+    pointer-events: none;
+  }
+
+  .winter__media img {
+    display: block;
+    width: 100%;
+    height: 112%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media (max-width: 980px) {
+    .winter {
+      grid-template-columns: 1fr;
+    }
+
+    .winter__content {
+      max-width: none;
+      order: 2;
+    }
+
+    .winter__media {
+      height: clamp(27rem, 62vw, 40rem);
+      min-height: 0;
+      order: 1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .winter__media {
+      height: 24rem;
+    }
+
+    .winter__cta {
+      width: 100%;
+    }
+  }
+</style>
