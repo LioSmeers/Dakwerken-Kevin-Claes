@@ -155,12 +155,29 @@
   if (!prefersReducedMotion) {
     gsap
       .timeline({ defaults: { ease: "power3.out" } })
+      .from(
+        ".hero__image",
+        {
+          scale: 1.08,
+          duration: 1.8,
+          ease: "power2.out",
+        },
+        0,
+      )
+      .from(
+        ".hero__overlay",
+        {
+          autoAlpha: 0,
+          duration: 0.9,
+        },
+        0,
+      )
       .from("[data-hero-animate]", {
         autoAlpha: 0,
         y: 24,
         duration: 0.85,
         stagger: 0.12,
-      })
+      }, 0.18)
       .from(
         "[data-hero-actions]",
         {
