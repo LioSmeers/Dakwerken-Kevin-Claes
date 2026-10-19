@@ -910,6 +910,10 @@ body.is-menu-open {
   margin-bottom: clamp(3.25rem, 6vw, 5.5rem);
 }
 
+.projects__intro--secondary {
+  margin-top: clamp(5rem, 10vw, 8rem);
+}
+
 .projects__eyebrow {
   grid-column: 1 / -1;
   margin: 0 0 clamp(0.55rem, 1.4vw, 1rem);
