@@ -229,7 +229,10 @@ body.is-menu-open {
 /* Subtiele glans bij hover en keyboard focus */
 .hero__button,
 .site-header__cta,
-.site-header__mobile-cta {
+.site-header__mobile-cta,
+.winter__cta,
+.about__cta,
+.contact__button {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -237,7 +240,10 @@ body.is-menu-open {
 
 .hero__button::after,
 .site-header__cta::after,
-.site-header__mobile-cta::after {
+.site-header__mobile-cta::after,
+.winter__cta::after,
+.about__cta::after,
+.contact__button::after {
   position: absolute;
   inset: -35% auto -35% -55%;
   z-index: -1;
@@ -261,7 +267,13 @@ body.is-menu-open {
 .site-header__cta:hover::after,
 .site-header__cta:focus-visible::after,
 .site-header__mobile-cta:hover::after,
-.site-header__mobile-cta:focus-visible::after {
+.site-header__mobile-cta:focus-visible::after,
+.winter__cta:hover::after,
+.winter__cta:focus-visible::after,
+.about__cta:hover::after,
+.about__cta:focus-visible::after,
+.contact__button:hover::after,
+.contact__button:focus-visible::after {
   transform: skewX(-18deg) translateX(560%);
 }
 
