@@ -156,6 +156,17 @@
     gsap
       .timeline({ defaults: { ease: "power3.out" } })
       .from(
+        ".site-header__logo",
+        {
+          autoAlpha: 0,
+          y: -96,
+          rotation: -4,
+          duration: 1.15,
+          ease: "bounce.out",
+        },
+        0.05,
+      )
+      .from(
         ".hero__image",
         {
           scale: 1.08,
