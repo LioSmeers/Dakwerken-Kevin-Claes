@@ -144,6 +144,29 @@ body.is-menu-open {
   display: block;
   width: 100%;
   height: auto;
+  transform-origin: 50% 0%;
+  animation: logo-drop-in 1.35s both;
+}
+
+@keyframes logo-drop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-180px) rotate(7deg) scale(0.92);
+  }
+
+  68% {
+    opacity: 1;
+    transform: translateY(12px) rotate(-1deg) scale(1.01);
+  }
+
+  84% {
+    transform: translateY(-5px) rotate(0.35deg) scale(0.998);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
 }
 
 .site-header__nav {
