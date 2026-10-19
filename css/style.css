@@ -145,22 +145,22 @@ body.is-menu-open {
   width: 100%;
   height: auto;
   transform-origin: 50% 0%;
-  animation: logo-drop-in 1.35s both;
+  animation: logo-drop-in 2.2s both;
 }
 
 @keyframes logo-drop-in {
   0% {
     opacity: 0;
-    transform: translateY(-180px) rotate(7deg) scale(0.92);
+    transform: translateY(-260px) rotate(9deg) scale(0.9);
   }
 
-  68% {
+  72% {
     opacity: 1;
-    transform: translateY(12px) rotate(-1deg) scale(1.01);
+    transform: translateY(16px) rotate(-1deg) scale(1.02);
   }
 
-  84% {
-    transform: translateY(-5px) rotate(0.35deg) scale(0.998);
+  88% {
+    transform: translateY(-6px) rotate(0.35deg) scale(0.998);
   }
 
   100% {
